@@ -1,0 +1,29 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "c03eb8020e3946dd0bd6f52e60411659"
+name = "banner-app-blackbytt"
+handle = "banner-app-blackbytt"
+application_url = "https://celebrate-dumb-intervention-mf.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "poc-v2.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = ""
+
+[auth]
+redirect_urls = [
+  "https://celebrate-dumb-intervention-mf.trycloudflare.com/auth/callback",
+  "https://celebrate-dumb-intervention-mf.trycloudflare.com/auth/shopify/callback",
+  "https://celebrate-dumb-intervention-mf.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-07"
+
+[pos]
+embedded = false
