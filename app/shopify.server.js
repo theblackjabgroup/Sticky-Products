@@ -3,11 +3,14 @@ import {
   ApiVersion,
   AppDistribution,
   shopifyApp,
+  BillingInterval,
 } from "@shopify/shopify-app-remix/server";
 import { PrismaSessionStorage } from "@shopify/shopify-app-session-storage-prisma";
 import { restResources } from "@shopify/shopify-api/rest/admin/2024-07";
 import prisma from "./db.server";
-
+import { BillingReplacementBehavior } from "@shopify/shopify-api";
+export const MONTHLY_PLAN = 'Monthly Subscription';
+export const ANNUAL_PLAN = 'Annual Subscription';
 const shopify = shopifyApp({
   apiKey: process.env.SHOPIFY_API_KEY,
   apiSecretKey: process.env.SHOPIFY_API_SECRET || "",
@@ -18,6 +21,21 @@ const shopify = shopifyApp({
   sessionStorage: new PrismaSessionStorage(prisma),
   distribution: AppDistribution.AppStore,
   restResources,
+  billing: {
+    [MONTHLY_PLAN]: {
+      amount: 10,
+      currencyCode: 'USD',
+      interval: BillingInterval.Every30Days,
+      replacementBehavior: BillingReplacementBehavior.ApplyImmediately
+      
+    },
+    [ANNUAL_PLAN]: {
+      amount: 90,
+      currencyCode: 'USD',
+      interval: BillingInterval.Annual,
+      replacementBehavior: BillingReplacementBehavior.ApplyImmediately
+    },
+  },
   future: {
     unstable_newEmbeddedAuthStrategy: true,
   },
