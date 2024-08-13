@@ -9,7 +9,6 @@ embedded = true
 [build]
 include_config_on_deploy = true
 dev_store_url = "poc-v2.myshopify.com"
-include_config_on_deploy = true
 
 
 [access_scopes]
