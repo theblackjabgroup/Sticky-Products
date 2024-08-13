@@ -1,0 +1,30 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "e417f6f19b4fa06f7770bf9085d1a286"
+name = "Recently-Viewed-Products"
+handle = "recently-viewed-products-9"
+application_url = "https://lionfish-app-hrorj.ondigitalocean.app/"
+embedded = true
+
+[build]
+include_config_on_deploy = true
+dev_store_url = "poc-v2.myshopify.com"
+include_config_on_deploy = true
+
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_products, write_checkouts"
+
+[auth]
+redirect_urls = [
+  "https://lionfish-app-hrorj.ondigitalocean.app/auth/callback",
+  "https://lionfish-app-hrorj.ondigitalocean.app/auth/shopify/callback",
+  "https://lionfish-app-hrorj.ondigitalocean.app/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-07"
+
+[pos]
+embedded = false
