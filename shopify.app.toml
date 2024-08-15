@@ -20,9 +20,11 @@ redirect_urls = [
 [webhooks]
 api_version = "2024-07"
 
-  [[webhooks.subscriptions]]
-  uri = "https://lionfish-app-hrorj.ondigitalocean.app/webhooks"
-  compliance_topics = [ "customers/redact", "customers/data_request", "shop/redact" ]
+[[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "https://example.app/webhooks"
+  compliance_topics = [ "customers/data_request", "customers/redact", "shop/redact" ]
+
 
 [pos]
 embedded = false
