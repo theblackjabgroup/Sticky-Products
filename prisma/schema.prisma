@@ -30,3 +30,18 @@ model Session {
   collaborator  Boolean?  @default(false)
   emailVerified Boolean?  @default(false)
 }
+
+model Banner {
+  id                       Int   
+  topValue                 String
+  leftValue                String
+  displayPosition          String
+  productHandleStr         String
+  bgColor                  String
+  buColor                  String
+  fontColor                String
+  fontSize                 Int
+  shop                     String
+
+  @@id([id, shop]) // Composite primary key using id and shop
+}

@@ -1,0 +1,141 @@
+:root {
+    --main-bb-bg-color: #fff; /* Default value */
+    --main-bb-bu-color: black; /* Default value */
+    --main-bb-font-color: #767676; /* Default value */
+    --main-bb-font-size: 12px;
+  }
+  
+
+.bb-container {
+    position: fixed;
+    width: 30%;
+    z-index: 1000;
+    background-color: var(--main-bb-bg-color);
+    color: var(--main-bb-font-color);
+    padding: 10px;
+    border-radius: 10px;
+    transition: top .4s;;
+}
+
+.bb-close-btn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background-color: black;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transform: translate(8px, -6px);
+}
+
+.bb-close-btn:hover{
+    background-color: red;
+    transition: linear;
+}
+
+.bb-inner-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+.bb-label {
+    padding: 5px 23px;
+    text-align: center;
+    font-size: 10px;
+    font-family: Roobert;
+}
+
+.bb-upper-label {
+    align-self: center;
+    border-radius: 51px;
+    margin-right: 10px;
+}
+
+.bb-upper-label-sale {
+    color: #279002;
+    background-color: rgba(158, 255, 124, 0.3);
+}
+
+.bb-upper-label-sold {
+    color: red;
+    background-color: #FFEE9C;
+}
+.bb-inner-button {
+    padding: 10px 20px;
+    font-size: var(--main-bb-font-size);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: black; 
+    color: white;
+    transition: color .2s;
+    will-change: color;
+}
+
+.bb-banner {
+    background-color: var(--main-bb-bg-color);
+    text-align:  center;
+    color: var(--main-bb-font-color);
+    font-size: var(--main-bb-font-size);
+    font-family: Roobert;
+    align-self: center;
+}
+
+.bb-line {
+    height: 1.1px;
+    overflow: hidden;
+    width: 100%;
+    background: lightgrey;
+    margin-bottom: 5px;
+}
+
+.bb-child-line {
+    transform: translate3d(0%, 0px, 0px);
+    background: grey;
+    height: 100%;
+    width: 100%;
+}
+
+.bb-button-parent {
+    transition-delay: 250ms;
+    transition-timing-function: ease;
+    transition-duration: .2s;
+    transition-property: opacity;
+}
+
+.bb-upperButtonDiv {
+    align-self: center;
+    justify-self: center;
+}
+
+.bb-banner:has(img) {
+    line-height: 0px;
+  }
+
+  .bb-pro-img{
+    width: 55%;
+    border-radius: 3px;
+  }
+  @media only screen and (max-width: 1450px) {
+    .bb-banner {
+        font-size: var(--main-bb-font-size);
+    }
+
+    .bb-inner-button{
+        font-size: var(--main-bb-font-size);
+        padding: 10px 6px;
+    }
+
+    .bb-label {
+        padding: 5px 3px;
+    }
+
+    .bb-pro-img{
+        width: 70%;
+      }
+  }
