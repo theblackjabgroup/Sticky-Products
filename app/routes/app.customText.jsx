@@ -88,7 +88,15 @@ function TextFieldExample() {
     if (widgetConfig) {
       setTopValue(widgetConfig.topValue || 0);
       setLeftValue(widgetConfig.leftValue || 0);
-      setRecentlyViewed(widgetConfig.enableRecentlyViewed || false);
+   //   setRecentlyViewed(widgetConfig.enableRecentlyViewed || false);
+      setRecentlyViewed(() => {
+        const newState = widgetConfig.enableRecentlyViewed || false;
+        document.documentElement.style.setProperty(
+          '--main-bb-slider-color',
+          newState ? "#279002" : "#D9D9D9"
+        );
+        return newState;
+      });
       setSelectProductsState(widgetConfig.productHandleStr || "");
       setSelectedProductId(widgetConfig.productIdStr || 0)
       setBgColor(widgetConfig.bgColor || '#FFFFFF');
@@ -148,12 +156,23 @@ function TextFieldExample() {
       }));
     }
     console.log("selectionIds ", selectionIds);
-    const products = await window.shopify.resourcePicker({
+    var products;
+    if (selectionIds.length > 0)
+    {
+     products = await window.shopify.resourcePicker({
       type: "product",
       action: "select", // customized action verb, either 'select' or 'add',
       multiple: 3,
       selectionIds: selectionIds,
     });
+  }
+  else{
+     products = await window.shopify.resourcePicker({
+      type: "product",
+      action: "select", // customized action verb, either 'select' or 'add',
+      multiple: 3,
+    });  
+  }
 
     console.log("resourcePicker products ", products);
 
