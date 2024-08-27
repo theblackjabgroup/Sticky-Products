@@ -140,14 +140,13 @@ function TextFieldExample() {
 
   async function selectProductImage() {
     var selectionIds = [];
-    if (widgetConfig)
-    {
-      console.log("widgetConfig.productIdStr ",widgetConfig.productIdStr)
-    selectionIds = widgetConfig.productIdStr.split(',').map(id => ({
-      id: `gid://shopify/Product/${id.trim()}`
-    }));
-  }
-    console.log("selectionIds ",selectionIds);
+    if (widgetConfig) {
+      console.log("widgetConfig.productIdStr ", widgetConfig.productIdStr)
+      selectionIds = widgetConfig.productIdStr.split(',').map(id => ({
+        id: `gid://shopify/Product/${id.trim()}`
+      }));
+    }
+    console.log("selectionIds ", selectionIds);
     const products = await window.shopify.resourcePicker({
       type: "product",
       action: "select", // customized action verb, either 'select' or 'add',
@@ -160,11 +159,14 @@ function TextFieldExample() {
     if (products) {
       var handleStr = "";
       var idStr = "";
-      products.forEach(pro => {
-        const { handle , id} = pro;
+      products.forEach((pro, index) => {
+        const { handle, id } = pro;
         console.log("Selected product handle:", handle, id);
-        handleStr += handle + ",";
-        idStr += id + ",";
+
+        if (index < products.length - 1) {
+          handleStr += handle + ",";
+          idStr += id + ",";
+        }
       });
 
       console.log("Selected product handleStr:", handleStr);
