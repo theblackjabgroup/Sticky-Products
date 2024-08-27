@@ -10,6 +10,7 @@ export async function createOrUpdateBanner(arrayToIterate) {
                 leftValue: obj.leftValue,
                 displayPosition: obj.displayPosition,
                 productHandleStr: obj.productHandleStr,
+                productIdStr: obj.productIdStr,
                 bgColor: obj.bgColor,
                 buColor: obj.buColor,
                 fontColor: obj.fontColor,
