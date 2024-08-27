@@ -290,7 +290,6 @@ async function checkoutProduct(productVariantId) {
 }
 
 function add_banner(displayPosition, top, left, bgColor, buColor, fontColor ,fontSize, reqProductArr) {
-  left += 10;
   console.log("reqProductArr.length ", reqProductArr.length);
   if (location.href.indexOf("cart") == -1 && reqProductArr.length) {
     const headerTag = document.querySelectorAll('[class*="header"]')[0];
@@ -319,7 +318,10 @@ function add_banner(displayPosition, top, left, bgColor, buColor, fontColor ,fon
       const imgDiv = document.createElement("div");
       imgDiv.className = "bb-banner";
       const img = document.createElement("img");
+      if(reqProductArr[i])
+      {
       img.src = reqProductArr[i].featured_image;
+      }
       img.className = "bb-pro-img";
       imgDiv.appendChild(img);
       childDiv.appendChild(imgDiv);
@@ -391,17 +393,23 @@ function add_banner(displayPosition, top, left, bgColor, buColor, fontColor ,fon
     if (headerTag) {
       var posTop = headerTag.clientHeight + parseInt(top, 10) + 5;
       if (displayPosition == "top-left") {
+        left = parseInt(left) + 10;
         parentDiv.style.top = posTop + "px";
         parentDiv.style.left = left + "px";
       }
       if (displayPosition == "top-right") {
         parentDiv.style.top = posTop + "px";
-        parentDiv.style.right = "0px";
+        parentDiv.style.right = "10px";
+        
         if (left != "0") {
           parentDiv.style.left = left + "px";
         }
+        
       }
       if (displayPosition == "bottom-left") {
+        console.log("left value before ",left)
+        left = parseInt(left) + 10;
+        console.log("left value ",left)
         parentDiv.style.bottom = "0px";
         parentDiv.style.left = left + "px";
         if (top != "0") {
@@ -410,7 +418,7 @@ function add_banner(displayPosition, top, left, bgColor, buColor, fontColor ,fon
       }
       if (displayPosition == "bottom-right") {
         parentDiv.style.bottom = "0px";
-        parentDiv.style.right = "0px";
+        parentDiv.style.right = "10px";
         if (top != "0") {
           parentDiv.style.top = posTop + "px";
         }

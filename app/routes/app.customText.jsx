@@ -8,11 +8,27 @@ import {
 import { createOrUpdateBanner } from "../app.server"
 import { authenticate } from "../shopify.server";
 import {
+  useLoaderData,
   useSubmit,
 } from "@remix-run/react";
-import { ColorPicker } from '@shopify/polaris';
 
+export async function loader({ request, params}){
+  const { session } = await authenticate.admin(request);
+  const { shop } = session;
 
+  const widgetConfig = await prisma.banner.findUnique({
+    where: {
+      id: params.id,
+      shop: shop
+    }
+  });
+  console.log("widgetConfig ",widgetConfig);
+  console.log("params.id ", params.id);
+  console.log("shop", shop)
+  console.log("{ widgetConfig } ", { widgetConfig });
+  console.log("json({ widgetConfig }) ", json({ widgetConfig }));
+ return json({ widgetConfig });
+}
 export async function action({ request, params }) {
   console.log("inside action ", params);
   const { session } = await authenticate.admin(request);
@@ -31,6 +47,8 @@ export async function action({ request, params }) {
 
 function TextFieldExample() {
 
+  const { widgetConfig } = useLoaderData();
+  console.log("widgetConfig in TextFieldExample", widgetConfig)
   const submit = useSubmit();
   function handleSave() {
 
@@ -51,6 +69,23 @@ function TextFieldExample() {
 
   const [topValue, setTopValue] = useState(0);
   const [leftValue, setLeftValue] = useState(0);
+  const [enableRecentlyViewed, setRecentlyViewed] = useState(false);
+  const [selectProductsState, setSelectProductsState] = useState("");
+  const [bgcolor, setBgColor] = useState('#FFFFFF');
+  const [bucolor, setBuColor] = useState('#000000');
+  const [fontColor, setFontColor] = useState('#767676');
+
+  useEffect(() => {
+    if (widgetConfig) {
+      setTopValue(widgetConfig.topValue || 0);
+      setLeftValue(widgetConfig.leftValue || 0);
+      setRecentlyViewed(widgetConfig.enableRecentlyViewed || false);
+      setSelectProductsState(widgetConfig.selectProductsState || "");
+      setBgColor(widgetConfig.bgColor || '#FFFFFF');
+      setBuColor(widgetConfig.buColor || '#000000')
+      setFontColor(widgetConfig.fontColor || '#767676')
+    }
+  }, [widgetConfig]);
 
   const handleTopSliderChange = useCallback((value) => {
     setTopValue(value);
@@ -78,7 +113,6 @@ function TextFieldExample() {
     handleSave()
   }
 
-  const [enableRecentlyViewed, setRecentlyViewed] = useState(false);
   function handleRecentlyViewed() {
     setRecentlyViewed(prevState => {
       const newState = !prevState;
@@ -93,7 +127,6 @@ function TextFieldExample() {
   const [lockAspectChecked, setLockAspectChecked] = useState(false);
   function handlelockAspectChecked() { setLockAspectChecked(!lockAspectChecked) }
 
-  const [selectProductsState, setSelectProductsState] = useState("");
 
   async function selectProductImage() {
     const products = await window.shopify.resourcePicker({
@@ -120,10 +153,6 @@ function TextFieldExample() {
   const toggleBgColorPicker = (value) => setBgColor(value);
   const toggleBuColorPicker = (value) => setBuColor(value);
   const toggleFontColorPicker = (value) => setFontColor(value);
-
-  const [bgcolor, setBgColor] = useState('#FFFFFF');
-  const [bucolor, setBuColor] = useState('#000000');
-  const [fontColor, setFontColor] = useState('#767676');
 
   function getFontSizeBasedOnScreen() {
     if (typeof window !== "undefined") {
