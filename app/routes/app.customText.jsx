@@ -68,7 +68,8 @@ function TextFieldExample() {
       "bgColor": bgcolor,
       "buColor": bucolor,
       "fontColor": fontColor,
-      fontSize: fontSize
+      fontSize: fontSize,
+      "recentlyViewed": enableRecentlyViewed
     };
     setSelectProductsState("");
     submit(data, { method: "post" });

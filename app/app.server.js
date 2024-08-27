@@ -15,6 +15,7 @@ export async function createOrUpdateBanner(arrayToIterate) {
                 buColor: obj.buColor,
                 fontColor: obj.fontColor,
                 fontSize: parseInt(obj.fontSize),
+                recentlyViewed: obj.recentlyViewed,
                 shop: obj.shop,
               };
               const sticky = await db.banner.findFirst({

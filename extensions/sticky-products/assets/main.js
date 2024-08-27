@@ -191,7 +191,7 @@ async function identifyProductfromReq() {
   {
     const fixProductArr  = productHandleStr.split(",");
     console.log("fixProductArr ", fixProductArr);
-    fixProductArr.pop();
+   // fixProductArr.pop();
     fixProductArr.forEach(element => {
       const fetchPromise =  fetchProduct(element).then((response) => {
         reqProductArr.unshift(response);

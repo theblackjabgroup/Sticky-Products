@@ -42,6 +42,7 @@ model Banner {
   buColor                  String
   fontColor                String
   fontSize                 Int
+  recentlyViewed           String
   shop                     String
 
   @@id([id, shop]) // Composite primary key using id and shop

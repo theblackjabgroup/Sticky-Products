@@ -29,6 +29,7 @@ CREATE TABLE "Banner" (
     "buColor" TEXT NOT NULL,
     "fontColor" TEXT NOT NULL,
     "fontSize" INTEGER NOT NULL,
+    "recentlyViewed" TEXT NOT NULL,
     "shop" TEXT NOT NULL,
 
     PRIMARY KEY ("id", "shop")
