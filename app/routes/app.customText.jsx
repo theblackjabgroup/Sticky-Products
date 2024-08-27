@@ -143,7 +143,7 @@ function TextFieldExample() {
     if (widgetConfig) {
       console.log("widgetConfig.productIdStr ", widgetConfig.productIdStr)
       selectionIds = widgetConfig.productIdStr.split(',').map(id => ({
-        id: `gid://shopify/Product/${id.trim()}`
+        id: `${id.trim()}`
       }));
     }
     console.log("selectionIds ", selectionIds);
