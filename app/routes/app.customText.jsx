@@ -11,6 +11,9 @@ import {
   useLoaderData,
   useSubmit,
 } from "@remix-run/react";
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export async function loader({ request, params}){
   const { session } = await authenticate.admin(request);
