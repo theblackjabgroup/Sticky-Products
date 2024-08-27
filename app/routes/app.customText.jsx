@@ -139,7 +139,7 @@ function TextFieldExample() {
       type: "product",
       action: "select", // customized action verb, either 'select' or 'add',
       multiple: 3,
-      selectionIds: ['gid://shopify/Product/9214140481831'],
+      selectionIds: ["gid://shopify/ProductVariant/48240496607527"],
     });
 
     console.log("resourcePicker products ", products);
