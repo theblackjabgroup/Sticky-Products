@@ -89,14 +89,7 @@ function TextFieldExample() {
       setTopValue(widgetConfig.topValue || 0);
       setLeftValue(widgetConfig.leftValue || 0);
    //   setRecentlyViewed(widgetConfig.enableRecentlyViewed || false);
-   setRecentlyViewed(() => {
-    const newState = widgetConfig.enableRecentlyViewed;
-    document.documentElement.style.setProperty(
-      '--main-bb-slider-color',
-      newState ? "#279002" : "#D9D9D9"
-    );
-    return newState;
-  });
+
       setSelectProductsState(widgetConfig.productHandleStr || "");
       setSelectedProductId(widgetConfig.productIdStr || 0)
       setBgColor(widgetConfig.bgColor || '#FFFFFF');
@@ -106,8 +99,16 @@ function TextFieldExample() {
     }
   }, [widgetConfig]);
 
-
-  
+  if (widgetConfig) {
+  setRecentlyViewed(() => {
+    const newState = widgetConfig.enableRecentlyViewed;
+    document.documentElement.style.setProperty(
+      '--main-bb-slider-color',
+      newState ? "#279002" : "#D9D9D9"
+    );
+    return newState;
+  });
+}
   const handleTopSliderChange = useCallback((value) => {
     setTopValue(value);
   }, []);
