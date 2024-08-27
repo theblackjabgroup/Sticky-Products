@@ -162,10 +162,12 @@ function TextFieldExample() {
       products.forEach((pro, index) => {
         const { handle, id } = pro;
         console.log("Selected product handle:", handle, id);
-
+        handleStr += handle;
+        idStr += id;
+        
         if (index < products.length - 1) {
-          handleStr += handle + ",";
-          idStr += id + ",";
+          handleStr += ",";
+          idStr += ",";
         }
       });
 
