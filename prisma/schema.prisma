@@ -37,6 +37,7 @@ model Banner {
   leftValue                String
   displayPosition          String
   productHandleStr         String
+  productIdStr             String
   bgColor                  String
   buColor                  String
   fontColor                String

@@ -64,6 +64,7 @@ function TextFieldExample() {
       "leftValue": leftValue,
       "displayPosition": positionClasses[activeIndex],
       "productHandleStr": selectProductsState,
+      "productIdStr": selectedProductsId,
       "bgColor": bgcolor,
       "buColor": bucolor,
       "fontColor": fontColor,
@@ -77,6 +78,7 @@ function TextFieldExample() {
   const [leftValue, setLeftValue] = useState(0);
   const [enableRecentlyViewed, setRecentlyViewed] = useState(false);
   const [selectProductsState, setSelectProductsState] = useState("");
+  const [selectedProductsId, setSelectedProductId] = useState(0);
   const [bgcolor, setBgColor] = useState('#FFFFFF');
   const [bucolor, setBuColor] = useState('#000000');
   const [fontColor, setFontColor] = useState('#767676');
@@ -86,10 +88,12 @@ function TextFieldExample() {
       setTopValue(widgetConfig.topValue || 0);
       setLeftValue(widgetConfig.leftValue || 0);
       setRecentlyViewed(widgetConfig.enableRecentlyViewed || false);
-      setSelectProductsState(widgetConfig.selectProductsState || "");
+      setSelectProductsState(widgetConfig.productHandleStr || "");
+      setSelectedProductId(widgetConfig.productIdStr || 0)
       setBgColor(widgetConfig.bgColor || '#FFFFFF');
-      setBuColor(widgetConfig.buColor || '#000000')
-      setFontColor(widgetConfig.fontColor || '#767676')
+      setBuColor(widgetConfig.buColor || '#000000');
+      setFontColor(widgetConfig.fontColor || '#767676');
+      setFontSize(widgetConfig.fontSize || 14)
     }
   }, [widgetConfig]);
 
@@ -135,29 +139,37 @@ function TextFieldExample() {
 
 
   async function selectProductImage() {
+    console.log("widgetConfig.productIdStr ",widgetConfig.productIdStr)
+    const selectionIds = [];
+    if (widgetConfig)
+    {
+    selectionIds = widgetConfig.productIdStr.split(',').map(id => ({
+      id: `gid://shopify/Product/${id.trim()}`
+    }));
+  }
+    console.log("selectionIds ",selectionIds);
     const products = await window.shopify.resourcePicker({
       type: "product",
       action: "select", // customized action verb, either 'select' or 'add',
       multiple: 3,
-      selectionIds: [
-        {
-          id: 'gid://shopify/Product/9214140481831',
-        },
-      ],
+      selectionIds: selectionIds,
     });
 
     console.log("resourcePicker products ", products);
 
     if (products) {
       var handleStr = "";
+      var idStr = "";
       products.forEach(pro => {
-        const { handle } = pro;
-        console.log("Selected product handle:", handle);
+        const { handle , id} = pro;
+        console.log("Selected product handle:", handle, id);
         handleStr += handle + ",";
+        idStr += id + ",";
       });
 
       console.log("Selected product handleStr:", handleStr);
       setSelectProductsState(handleStr);
+      setSelectedProductId(idStr);
     }
     console.log("resourcePicker products after ", selectProductsState);
   }
