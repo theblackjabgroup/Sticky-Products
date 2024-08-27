@@ -139,7 +139,7 @@ function TextFieldExample() {
 
 
   async function selectProductImage() {
-    const selectionIds = [];
+    var selectionIds = [];
     if (widgetConfig)
     {
       console.log("widgetConfig.productIdStr ",widgetConfig.productIdStr)
