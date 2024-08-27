@@ -99,6 +99,7 @@ function TextFieldExample() {
     }
   }, [widgetConfig]);
 
+  /*
   if (widgetConfig) {
   setRecentlyViewed(() => {
     const newState = widgetConfig.enableRecentlyViewed;
@@ -109,6 +110,7 @@ function TextFieldExample() {
     return newState;
   });
 }
+*/
   const handleTopSliderChange = useCallback((value) => {
     setTopValue(value);
   }, []);
