@@ -139,10 +139,10 @@ function TextFieldExample() {
 
 
   async function selectProductImage() {
-    console.log("widgetConfig.productIdStr ",widgetConfig.productIdStr)
     const selectionIds = [];
     if (widgetConfig)
     {
+      console.log("widgetConfig.productIdStr ",widgetConfig.productIdStr)
     selectionIds = widgetConfig.productIdStr.split(',').map(id => ({
       id: `gid://shopify/Product/${id.trim()}`
     }));
