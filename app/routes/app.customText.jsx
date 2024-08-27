@@ -12,6 +12,7 @@ import {
   useSubmit,
 } from "@remix-run/react";
 import { PrismaClient } from '@prisma/client';
+import { json } from "@remix-run/node";
 
 const prisma = new PrismaClient();
 
