@@ -21,8 +21,10 @@ export async function loader({ request, params}){
 
   const widgetConfig = await prisma.banner.findUnique({
     where: {
-      id: params.id,
-      shop: shop
+      id_shop: {
+        id: 1, 
+        shop: shop
+      }
     }
   });
   console.log("widgetConfig ",widgetConfig);
