@@ -1,6 +1,6 @@
 import '../styles/styles.css'
 
-import { Page, InlineStack, Text, Icon, Card, Button, Checkbox, BlockStack, Banner, RangeSlider, ButtonGroup, PageActions, Popover, TextField, FormLayout, Banner } from '@shopify/polaris';
+import { Page, InlineStack, Text, Icon, Card, Button, Checkbox, BlockStack, Banner, RangeSlider, ButtonGroup, PageActions, Popover, TextField, FormLayout } from '@shopify/polaris';
 import { useState, useCallback, useEffect } from 'react';
 import {
   ButtonPressIcon, TextAlignLeftIcon, TextAlignCenterIcon
