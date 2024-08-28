@@ -1,6 +1,6 @@
 import '../styles/styles.css'
 
-import { Page, InlineStack, Text, Icon, Card, Button, Checkbox, BlockStack, Banner, RangeSlider, ButtonGroup, PageActions, Popover, TextField, FormLayout } from '@shopify/polaris';
+import { Page, InlineStack, Text, Icon, Card, Button, Checkbox, BlockStack, Banner, RangeSlider, ButtonGroup, PageActions, Popover, TextField, FormLayout, Banner } from '@shopify/polaris';
 import { useState, useCallback, useEffect } from 'react';
 import {
   ButtonPressIcon, TextAlignLeftIcon, TextAlignCenterIcon
@@ -73,6 +73,8 @@ function TextFieldExample() {
     };
     setSelectProductsState("");
     submit(data, { method: "post" });
+    setTopBannerStatus('success')
+    setTopBannerText("Saved Successfully")
   }
 
   const [topValue, setTopValue] = useState(0);
@@ -243,11 +245,16 @@ function TextFieldExample() {
   const [fontSize, setFontSize] = useState(getFontSizeBasedOnScreen());
 
   const handleFontSize = (value) => setFontSize(value);
+  const [topBannerStatus, setTopBannerStatus] = useState('info')
+  const [topBannerText, setTopBannerText] = useState('Select Producs Or Enable Recently Viewed Before Saving.')
 
   return (
     <Page title="Recently Viewed">
       <div className='grid' style={{ display: 'grid', gridTemplateColumns: '1.3fr 0.7fr', gap: '10px' }}>
         <div className='product-view-card'>
+        <Banner
+            title={topBannerText}
+            tone={topBannerStatus}>
           <div style={{ height: '900px', background: 'white', borderRadius: '9px', boxShadow: 'var(--p-shadow-0)', paddingTop: '50px' }}>
             <div class="bb-container" style={{ backgroundColor: bgcolor }}>
               <button class="bb-close-btn">x</button>
@@ -309,6 +316,7 @@ function TextFieldExample() {
               </div>
             </div>
           </div>
+          </Banner>
         </div>
         <Card>
           <BlockStack gap={1000}>
