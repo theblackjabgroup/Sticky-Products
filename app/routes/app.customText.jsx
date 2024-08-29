@@ -146,9 +146,9 @@ function TextFieldExample() {
         '--main-bb-slider-color',
         newState ? "#279002" : "#D9D9D9"
       );
+      setRecentlyViewedPreview(newState ? "block" : "none");
       return newState;
     });
-    setRecentlyViewedPreview("block");
   }
 
   const [lockAspectChecked, setLockAspectChecked] = useState(false);
