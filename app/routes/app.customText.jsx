@@ -148,6 +148,7 @@ function TextFieldExample() {
       );
       return newState;
     });
+    setRecentlyViewedPreview("block");
   }
 
   const [lockAspectChecked, setLockAspectChecked] = useState(false);
@@ -213,9 +214,9 @@ function TextFieldExample() {
       console.log("Nikhil inside window2")
       const width = window.innerWidth;
       if (width < 1450) {
-        return 11; // Example: medium font size for tablets
+        return 11; 
       } else {
-        return 14; // Example: larger font size for desktops
+        return 14; 
       }
     }
   }
@@ -246,7 +247,8 @@ function TextFieldExample() {
 
   const handleFontSize = (value) => setFontSize(value);
   const [topBannerStatus, setTopBannerStatus] = useState('info')
-  const [topBannerText, setTopBannerText] = useState('Select Producs Or Enable Recently Viewed Before Saving.')
+  const [topBannerText, setTopBannerText] = useState('Select Products Or Enable Recently Viewed Before Saving.')
+  const [recentlyViewedPreview, setRecentlyViewedPreview] = useState('none');
 
   return (
     <Page title="Recently Viewed">
@@ -256,7 +258,7 @@ function TextFieldExample() {
             title={topBannerText}
             tone={topBannerStatus}>
           <div style={{ height: '900px', background: 'white', borderRadius: '9px', boxShadow: 'var(--p-shadow-0)', paddingTop: '50px' }}>
-            <div class="bb-container" style={{ backgroundColor: bgcolor }}>
+            <div class="bb-container" style={{ backgroundColor: bgcolor, display: recentlyViewedPreview}}>
               <button class="bb-close-btn">x</button>
               <div class="bb-inner-container">
                 <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
