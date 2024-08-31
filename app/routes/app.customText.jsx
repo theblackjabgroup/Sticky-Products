@@ -371,7 +371,7 @@ function TextFieldExample() {
                               <img src={product.images[0].originalSrc} class="bb-pro-img" />
                             </div>
                             <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
-                              {product.handle}
+                              {product.title}
                             </div>
                             <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
                               {product.variants[0].price}
@@ -427,7 +427,7 @@ function TextFieldExample() {
                 output
                 label={<p style={{ fontWeight: "bold" }}>  Bar position ( Up / Down ) </p>}
                 min={0}
-                max={1000}
+                max={100}
                 value={topValue}
                 onChange={handleTopSliderChange}
               />
@@ -437,7 +437,7 @@ function TextFieldExample() {
                 output
                 label={<p style={{ fontWeight: "bold" }}> Bar position (Left  / Right ) </p>}
                 min={0}
-                max={1000}
+                max={100}
                 value={leftValue}
                 onChange={handleLeftSliderChange}
               />

@@ -200,7 +200,7 @@ async function identifyProductfromReq() {
    // fixProductArr.pop();
     fixProductArr.forEach(element => {
       const fetchPromise =  fetchProduct(element).then((response) => {
-        reqProductArr.unshift(response);
+        reqProductArr.push(response);
       })
       .catch((error) => {
         console.error(
@@ -301,7 +301,6 @@ function add_banner(displayPosition, top, left, bgColor, buColor, fontColor ,fon
     const headerTag = document.querySelectorAll('[class*="header"]')[0];
     console.log("Header Tag:", headerTag.clientHeight, headerTag.scrollHeight);
 
-    // Create a new div element
     const parentDiv = document.createElement("div");
     parentDiv.classList.add("bb-container");
     const cancelButtonDiv = document.createElement("button");
@@ -309,8 +308,9 @@ function add_banner(displayPosition, top, left, bgColor, buColor, fontColor ,fon
     cancelButtonDiv.textContent = 'x';
     parentDiv.appendChild(cancelButtonDiv);
     cancelButtonDiv.addEventListener("click", () => {
-        sessionStorage.clear();
-        window.location.reload()
+   //     sessionStorage.clear();
+   //     window.location.reload()
+        parentDiv.style.display = "none";
     });
 
     document.documentElement.style.setProperty('--main-bb-bg-color',bgColor);
