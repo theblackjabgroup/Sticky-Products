@@ -24,7 +24,7 @@ export async function loader({ request, params }) {
   const productsInfo = await admin.graphql(
     `#graphql
     query {
-      products() {
+      products(first: 100) {
         edges {
         node {
         id
