@@ -18,7 +18,7 @@ const prisma = new PrismaClient();
 
 export async function loader({ request, params }) {
   console.log("IN LOADER")
-  const { session, admin} = await authenticate.admin(request);
+  const { session, admin } = await authenticate.admin(request);
   const { shop } = session;
 
   const productsInfo = await admin.graphql(
@@ -59,9 +59,9 @@ export async function loader({ request, params }) {
       }
     }`,
   );
-  
+
   const productsJson = await productsInfo.json();
-  console.log("productsJson ",productsJson.data.products.edges)
+  console.log("productsJson ", productsJson.data.products.edges)
 
   const widgetConfig = await prisma.banner.findUnique({
     where: {
@@ -76,7 +76,7 @@ export async function loader({ request, params }) {
   console.log("shop", shop)
   console.log("{ widgetConfig } ", { widgetConfig });
   console.log("json({ widgetConfig }) ", json({ widgetConfig }));
-  return json({ widgetConfig , products: productsJson.data.products.edges});
+  return json({ widgetConfig, products: productsJson.data.products.edges });
 }
 
 export async function action({ request, params }) {
@@ -97,8 +97,8 @@ export async function action({ request, params }) {
 
 function TextFieldExample() {
 
-  const { widgetConfig , proJson} = useLoaderData();
-  console.log("proJson in TextFieldExample",proJson);
+  const { widgetConfig, proJson } = useLoaderData();
+  console.log("proJson in TextFieldExample", proJson);
   console.log("widgetConfig in TextFieldExample", widgetConfig)
   const submit = useSubmit();
   function handleSave() {
@@ -130,6 +130,7 @@ function TextFieldExample() {
   const [bgcolor, setBgColor] = useState('#FFFFFF');
   const [bucolor, setBuColor] = useState('#000000');
   const [fontColor, setFontColor] = useState('#767676');
+  const [productInfo, setProductInfo] = useState([]);
 
   useEffect(() => {
     if (widgetConfig) {
@@ -234,7 +235,7 @@ function TextFieldExample() {
       var idStr = "";
       products.forEach((pro, index) => {
         const { handle, id } = pro;
-      //  proInfo.push(getProInfo(id));
+        //  proInfo.push(getProInfo(id));
         console.log("Selected product handle:", handle, id);
         handleStr += handle;
         idStr += id;
@@ -244,9 +245,11 @@ function TextFieldExample() {
           idStr += ",";
         }
       });
+      proInfo.push(products);
       console.log("proInfo ", proInfo);
 
       console.log("Selected product handleStr:", handleStr);
+      setProductInfo(proInfo);
       setSelectProductsState(handleStr);
       setSelectedProductId(idStr);
     }
@@ -305,73 +308,141 @@ function TextFieldExample() {
             title={topBannerText}
             tone={topBannerStatus}>
             <div style={{ height: '900px', background: 'white', borderRadius: '9px', boxShadow: 'var(--p-shadow-0)', paddingTop: '50px' }}>
-            {recentlyViewedPreview ? (
-              <div class="bb-container" style={{ backgroundColor: bgcolor}}>
-                <button class="bb-close-btn">x</button>
-                <div class="bb-inner-container">
-                  <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
-                    <img src="//cdn.shopify.com/s/files/1/0799/0158/9799/files/casual-fashion-woman_925x_d0d36c27-3415-451f-bb47-f90d95fb7ee1.jpg?v=1714067302" class="bb-pro-img" />
+              {recentlyViewedPreview && (
+                <div class="bb-container" style={{ backgroundColor: bgcolor }}>
+                  <button class="bb-close-btn">x</button>
+                  <div class="bb-inner-container">
+                    <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
+                      <img src="//cdn.shopify.com/s/files/1/0799/0158/9799/files/casual-fashion-woman_925x_d0d36c27-3415-451f-bb47-f90d95fb7ee1.jpg?v=1714067302" class="bb-pro-img" />
+                    </div>
+                    <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
+                      Classic V...
+                    </div>
+                    <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>60.00</div>
+                    <div class="bb-upper-label bb-upper-label-sold"><div class="bb-label">Sold Out</div></div>
+                    <div class="bb-upperButtonDiv">
+                      <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button></div>
                   </div>
-                  <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
-                    Classic V...
+                  <div class="bb-line">
+                    <div class="bb-child-line">
+                    </div>
                   </div>
-                  <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>60.00</div>
-                  <div class="bb-upper-label bb-upper-label-sold"><div class="bb-label">Sold Out</div></div>
-                  <div class="bb-upperButtonDiv">
-                    <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button></div>
+                  <div class="bb-inner-container">
+                    <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
+                      <img src="//cdn.shopify.com/s/files/1/0799/0158/9799/files/dark-wall-bedside-table_925x_10e5b8ba-a57c-4651-a5e9-fce49a2f3ebd.jpg?v=1714064469" class="bb-pro-img" />
+                    </div>
+                    <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
+                      Bedside T...
+                    </div>
+                    <div class="bb-banner" style={{ lineHeight: '1', backgroundColor: bgcolor, color: fontColor }}>
+                      <div style={{ textDecoration: 'line-through', fontSize: fontSize }}>85.00</div>
+                      <div style={{ fontSize: fontSize }}>69.99</div>
+                    </div>
+                    <div class="bb-upper-label bb-upper-label-sale">
+                      <div class="bb-label">On Sale</div>
+                    </div>
+                    <div class="bb-upperButtonDiv">
+                      <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button>
+                    </div>
+                  </div>
+                  <div class="bb-line">
+                    <div class="bb-child-line">
+                    </div>
+                  </div>
+                  <div class="bb-inner-container" style={{ marginBottom: '0px' }}>
+                    <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
+                      <img src="//cdn.shopify.com/s/files/1/0799/0158/9799/files/comfortable-living-room-cat_925x_b270a759-b837-47c8-8717-c4c747a2b42b.jpg?v=1714064467" class="bb-pro-img" />
+                    </div>
+                    <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
+                      Black Bea...
+                    </div>
+                    <div class="bb-banner" style={{ lineHeight: '1', backgroundColor: bgcolor, color: fontColor }}>
+                      <div style={{ textDecoration: 'line-through', fontSize: fontSize }}>80.00</div>
+                      <div style={{ fontSize: fontSize }}>69.99</div>
+                    </div>
+                    <div class="bb-upper-label bb-upper-label-sale">
+                      <div class="bb-label">On Sale</div>
+                    </div>
+                    <div class="bb-upperButtonDiv">
+                      <button class="bb-inner-button" style={{ backgroundColor: bucolor }}>Buy Now</button>
+                    </div>
+                  </div>
                 </div>
-                <div class="bb-line">
-                  <div class="bb-child-line">
-                  </div>
+              )
+              }
+
+              {!recentlyViewedPreview && (
+                <div>
+                  {productInfo.length > 0 ? (
+                    <div class="bb-container" style={{ backgroundColor: bgcolor }}>
+                      <button class="bb-close-btn">x</button>
+                      <div class="bb-inner-container">
+                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
+                          <img src="//cdn.shopify.com/s/files/1/0799/0158/9799/files/casual-fashion-woman_925x_d0d36c27-3415-451f-bb47-f90d95fb7ee1.jpg?v=1714067302" class="bb-pro-img" />
+                        </div>
+                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
+                          Classic V...
+                        </div>
+                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>60.00</div>
+                        <div class="bb-upper-label bb-upper-label-sold"><div class="bb-label">Sold Out</div></div>
+                        <div class="bb-upperButtonDiv">
+                          <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button></div>
+                      </div>
+                      <div class="bb-line">
+                        <div class="bb-child-line">
+                        </div>
+                      </div>
+                      <div class="bb-inner-container">
+                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
+                          <img src="//cdn.shopify.com/s/files/1/0799/0158/9799/files/dark-wall-bedside-table_925x_10e5b8ba-a57c-4651-a5e9-fce49a2f3ebd.jpg?v=1714064469" class="bb-pro-img" />
+                        </div>
+                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
+                          Bedside T...
+                        </div>
+                        <div class="bb-banner" style={{ lineHeight: '1', backgroundColor: bgcolor, color: fontColor }}>
+                          <div style={{ textDecoration: 'line-through', fontSize: fontSize }}>85.00</div>
+                          <div style={{ fontSize: fontSize }}>69.99</div>
+                        </div>
+                        <div class="bb-upper-label bb-upper-label-sale">
+                          <div class="bb-label">On Sale</div>
+                        </div>
+                        <div class="bb-upperButtonDiv">
+                          <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button>
+                        </div>
+                      </div>
+                      <div class="bb-line">
+                        <div class="bb-child-line">
+                        </div>
+                      </div>
+                      <div class="bb-inner-container" style={{ marginBottom: '0px' }}>
+                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
+                          <img src="//cdn.shopify.com/s/files/1/0799/0158/9799/files/comfortable-living-room-cat_925x_b270a759-b837-47c8-8717-c4c747a2b42b.jpg?v=1714064467" class="bb-pro-img" />
+                        </div>
+                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
+                          Black Bea...
+                        </div>
+                        <div class="bb-banner" style={{ lineHeight: '1', backgroundColor: bgcolor, color: fontColor }}>
+                          <div style={{ textDecoration: 'line-through', fontSize: fontSize }}>80.00</div>
+                          <div style={{ fontSize: fontSize }}>69.99</div>
+                        </div>
+                        <div class="bb-upper-label bb-upper-label-sale">
+                          <div class="bb-label">On Sale</div>
+                        </div>
+                        <div class="bb-upperButtonDiv">
+                          <button class="bb-inner-button" style={{ backgroundColor: bucolor }}>Buy Now</button>
+                        </div>
+                      </div>
+                    </div>
+                  ) :
+                    <div style={{ background: '#f0f0f0', height: '400px', width: '400px', margin: '0 auto', borderRadius: '9px', boxShadow: 'var(--p-shadow-0)' }}>
+                      <p style={{ fontSize: '2.5rem', display: "flex", alignItems: 'center', justifyContent: 'center', height: '100%', color: '#c0c0c0' }}>
+                        Select Product
+                      </p>
+                    </div>
+                  }
                 </div>
-                <div class="bb-inner-container">
-                  <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
-                    <img src="//cdn.shopify.com/s/files/1/0799/0158/9799/files/dark-wall-bedside-table_925x_10e5b8ba-a57c-4651-a5e9-fce49a2f3ebd.jpg?v=1714064469" class="bb-pro-img" />
-                  </div>
-                  <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
-                    Bedside T...
-                  </div>
-                  <div class="bb-banner" style={{ lineHeight: '1', backgroundColor: bgcolor, color: fontColor }}>
-                    <div style={{ textDecoration: 'line-through', fontSize: fontSize }}>85.00</div>
-                    <div style={{ fontSize: fontSize }}>69.99</div>
-                  </div>
-                  <div class="bb-upper-label bb-upper-label-sale">
-                    <div class="bb-label">On Sale</div>
-                  </div>
-                  <div class="bb-upperButtonDiv">
-                    <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button>
-                  </div>
-                </div>
-                <div class="bb-line">
-                  <div class="bb-child-line">
-                  </div>
-                </div>
-                <div class="bb-inner-container" style={{ marginBottom: '0px' }}>
-                  <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
-                    <img src="//cdn.shopify.com/s/files/1/0799/0158/9799/files/comfortable-living-room-cat_925x_b270a759-b837-47c8-8717-c4c747a2b42b.jpg?v=1714064467" class="bb-pro-img" />
-                  </div>
-                  <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
-                    Black Bea...
-                  </div>
-                  <div class="bb-banner" style={{ lineHeight: '1', backgroundColor: bgcolor, color: fontColor }}>
-                    <div style={{ textDecoration: 'line-through', fontSize: fontSize }}>80.00</div>
-                    <div style={{ fontSize: fontSize }}>69.99</div>
-                  </div>
-                  <div class="bb-upper-label bb-upper-label-sale">
-                    <div class="bb-label">On Sale</div>
-                  </div>
-                  <div class="bb-upperButtonDiv">
-                    <button class="bb-inner-button" style={{ backgroundColor: bucolor }}>Buy Now</button>
-                  </div>
-                </div>
-              </div>
-              ): 
-              <div style={{ background: '#f0f0f0', height: '400px', width: '400px', margin: '0 auto', borderRadius: '9px', boxShadow: 'var(--p-shadow-0)' }}>
-              <p style={{ fontSize: '2.5rem', display: "flex", alignItems: 'center', justifyContent: 'center', height: '100%', color: '#c0c0c0' }}>
-                Select Product
-              </p>
-            </div>
-            }
+              )
+              }
             </div>
           </Banner>
         </div>
