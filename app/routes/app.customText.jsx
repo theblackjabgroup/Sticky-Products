@@ -364,7 +364,7 @@ function TextFieldExample() {
                       <div class="bb-label">On Sale</div>
                     </div>
                     <div class="bb-upperButtonDiv">
-                      <button class="bb-inner-button" style={{ backgroundColor: bucolor }}>Buy Now</button>
+                      <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize  }}>Buy Now</button>
                     </div>
                   </div>
                 </div>
