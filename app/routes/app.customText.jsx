@@ -61,7 +61,7 @@ export async function loader({ request, params }) {
   );
   
   const productsJson = await productsInfo.json();
-  console.log("productsJson ",productsJson)
+  console.log("productsJson ",productsJson.data.products.edges)
 
   const widgetConfig = await prisma.banner.findUnique({
     where: {
@@ -76,7 +76,7 @@ export async function loader({ request, params }) {
   console.log("shop", shop)
   console.log("{ widgetConfig } ", { widgetConfig });
   console.log("json({ widgetConfig }) ", json({ widgetConfig }));
-  return json({ widgetConfig , productsJson});
+  return json({ widgetConfig , products: productsJson.data.products.edges});
 }
 
 export async function action({ request, params }) {
