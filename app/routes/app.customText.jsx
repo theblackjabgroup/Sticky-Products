@@ -378,7 +378,7 @@ function TextFieldExample() {
                       <button class="bb-close-btn">x</button>
                       {productInfo.map((product, index) => (
                         <div>
-                          <div class="bb-inner-container">
+                          <div class="bb-inner-container" style={{ marginBottom: index === productInfo.length - 1 && '0px' }}>
                             <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
                               <img src={product.images[0].originalSrc} class="bb-pro-img" />
                             </div>
@@ -390,9 +390,9 @@ function TextFieldExample() {
                             </div>
                             {product.inventoryQuantity === 0 ? (<div class="bb-upper-label bb-upper-label-sold"><div class="bb-label">Sold Out</div></div>)
                               : product.variants[0].compareAtPrice > product.variants[0].price
-                              &&
+                              ?
                               (<div class="bb-upper-label bb-upper-label-sale"><div class="bb-label">On Sale</div></div>
-                              )}
+                              ): <div class="bb-upper-label"><div class="bb-label"></div></div>}
                             <div class="bb-upperButtonDiv">
                               <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button></div>
                           </div>
