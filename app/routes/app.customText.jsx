@@ -5,7 +5,7 @@ import { useState, useCallback, useEffect } from 'react';
 import {
   ButtonPressIcon, TextAlignLeftIcon, TextAlignCenterIcon
 } from '@shopify/polaris-icons';
-import { createOrUpdateBanner, getProInfo } from "../app.server"
+import { createOrUpdateBanner } from "../app.server"
 import { authenticate } from "../shopify.server";
 import {
   useLoaderData,
