@@ -191,7 +191,7 @@ function TextFieldExample() {
         '--main-bb-slider-color',
         newState ? "#279002" : "#D9D9D9"
       );
-      setRecentlyViewedPreview(newState ? "block" : "none");
+      setRecentlyViewedPreview(newState ? true : false);
       return newState;
     });
   }
@@ -295,7 +295,7 @@ function TextFieldExample() {
   const handleFontSize = (value) => setFontSize(value);
   const [topBannerStatus, setTopBannerStatus] = useState('info')
   const [topBannerText, setTopBannerText] = useState('Select Products Or Enable Recently Viewed Before Saving.')
-  const [recentlyViewedPreview, setRecentlyViewedPreview] = useState('none');
+  const [recentlyViewedPreview, setRecentlyViewedPreview] = useState(false);
 
   return (
     <Page title="Recently Viewed">
@@ -305,7 +305,8 @@ function TextFieldExample() {
             title={topBannerText}
             tone={topBannerStatus}>
             <div style={{ height: '900px', background: 'white', borderRadius: '9px', boxShadow: 'var(--p-shadow-0)', paddingTop: '50px' }}>
-              <div class="bb-container" style={{ backgroundColor: bgcolor, display: recentlyViewedPreview }}>
+            {recentlyViewedPreview ? (
+              <div class="bb-container" style={{ backgroundColor: bgcolor}}>
                 <button class="bb-close-btn">x</button>
                 <div class="bb-inner-container">
                   <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
@@ -364,10 +365,13 @@ function TextFieldExample() {
                   </div>
                 </div>
               </div>
-
-
-
-
+              ): 
+              <div style={{ background: '#f0f0f0', height: '400px', width: '400px', margin: '0 auto', borderRadius: '9px', boxShadow: 'var(--p-shadow-0)' }}>
+              <p style={{ fontSize: '2.5rem', display: "flex", alignItems: 'center', justifyContent: 'center', height: '100%', color: '#c0c0c0' }}>
+                Select Product
+              </p>
+            </div>
+            }
             </div>
           </Banner>
         </div>
