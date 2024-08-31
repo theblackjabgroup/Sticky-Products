@@ -120,6 +120,11 @@ function TextFieldExample() {
     submit(data, { method: "post" });
     setTopBannerStatus('success')
     setTopBannerText("Saved Successfully")
+    const timer = setTimeout(() => {
+      setTopBannerStatus('info');
+      setTopBannerText("Select Product and Label Before Saving")
+    }, 5000);
+    return () => clearTimeout(timer);
   }
 
   const [topValue, setTopValue] = useState(0);
@@ -144,6 +149,22 @@ function TextFieldExample() {
       setBuColor(widgetConfig.buColor || '#000000');
       setFontColor(widgetConfig.fontColor || '#767676');
       setFontSize(widgetConfig.fontSize || 14)
+      if(widgetConfig.positionClasses == "top-left")
+      {
+        setActiveIndex(0);
+      }
+      else if(widgetConfig.positionClasses == "top-right")
+      {
+        setActiveIndex(1);
+      }
+      else if(widgetConfig.positionClasses == "bottom-left")
+      {
+        setActiveIndex(2);
+      }
+      else if(widgetConfig.positionClasses == "bottom-right")
+      {
+        setActiveIndex(3);
+      }
     }
   }, [widgetConfig]);
 
@@ -249,7 +270,9 @@ function TextFieldExample() {
       console.log("proInfo ", proInfo);
 
       console.log("Selected product handleStr:", handleStr);
+      useEffect(() => {
       setProductInfo(proInfo);
+    }, []);
       setSelectProductsState(handleStr);
       setSelectedProductId(idStr);
     }
