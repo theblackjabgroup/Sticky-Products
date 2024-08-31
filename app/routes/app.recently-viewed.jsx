@@ -97,12 +97,12 @@ function TextFieldExample() {
 
   useEffect(() => {
     if (widgetConfig) {
-      setTopValue(widgetConfig.topValue || 0);
-      setLeftValue(widgetConfig.leftValue || 0);
+      setTopValue(widgetConfig.topValue || "0");
+      setLeftValue(widgetConfig.leftValue || "0");
       //   setRecentlyViewed(widgetConfig.enableRecentlyViewed || false);
 
       setSelectProductsState(widgetConfig.productHandleStr || "");
-      setSelectedProductId(widgetConfig.productIdStr || 0)
+      setSelectedProductId(widgetConfig.productIdStr || "")
       setBgColor(widgetConfig.bgColor || '#FFFFFF');
       setBuColor(widgetConfig.buColor || '#000000');
       setFontColor(widgetConfig.fontColor || '#767676');
