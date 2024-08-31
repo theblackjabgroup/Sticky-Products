@@ -86,7 +86,9 @@ function TextFieldExample() {
 
   const [topValue, setTopValue] = useState(0);
   const [leftValue, setLeftValue] = useState(0);
-  const [enableRecentlyViewed, setRecentlyViewed] = useState(false);
+  const initialEnableRecentlyViewed = localStorage.getItem("enableRecentlyViewed") === 'true'; // Ensure it's a boolean
+
+  const [enableRecentlyViewed, setRecentlyViewed] = useState(initialEnableRecentlyViewed);
   const [selectProductsState, setSelectProductsState] = useState("");
   const [selectedProductsId, setSelectedProductId] = useState(0);
   const [bgcolor, setBgColor] = useState('#FFFFFF');
@@ -171,6 +173,7 @@ function TextFieldExample() {
         newState ? "#279002" : "#D9D9D9"
       );
       setRecentlyViewedPreview(newState ? true : false);
+      localStorage.setItem("enableRecentlyViewed", enableRecentlyViewed);
       return newState;
     });
   }
@@ -188,6 +191,7 @@ function TextFieldExample() {
   useEffect(() => {
     localStorage.setItem("productInfo", JSON.stringify(productInfo));
   }, [productInfo]);
+
 
   async function selectProductImage() {
     var selectionIds = [];
@@ -376,7 +380,7 @@ function TextFieldExample() {
                             <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
                               {product.variants[0].price}
                             </div>
-                            {product.inventoryQuantity === 0 ? (<div class="bb-upper-label bb-upper-label-sold"><div class="bb-label">Sold Out</div></div>)
+                            {product.totalInventory === 0 ? (<div class="bb-upper-label bb-upper-label-sold"><div class="bb-label">Sold Out</div></div>)
                               : product.variants[0].compareAtPrice > product.variants[0].price
                               ?
                               (<div class="bb-upper-label bb-upper-label-sale"><div class="bb-label">On Sale</div></div>
