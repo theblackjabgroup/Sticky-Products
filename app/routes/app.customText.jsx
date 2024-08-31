@@ -5,7 +5,7 @@ import { useState, useCallback, useEffect } from 'react';
 import {
   ButtonPressIcon, TextAlignLeftIcon, TextAlignCenterIcon
 } from '@shopify/polaris-icons';
-import { createOrUpdateBanner } from "../app.server"
+import { createOrUpdateBanner, getProInfo } from "../app.server"
 import { authenticate } from "../shopify.server";
 import {
   useLoaderData,
@@ -154,28 +154,7 @@ function TextFieldExample() {
   const [lockAspectChecked, setLockAspectChecked] = useState(false);
   function handlelockAspectChecked() { setLockAspectChecked(!lockAspectChecked) }
 
-  /*
-  async function getProInfo(proId){
-    const { admin } = await authenticate.admin(request);
-    console.log("in getProiNFO proId ", proId);
-    const response = await admin.graphql(
-      `#graphql
-      query {
-        product(id: "${proId}") {
-          title
-          featuredImage
-          priceRangeV2
-          compareAtPriceRange
-          totalInventory
-        }
-      }`,
-    );
-    
-    const data = await response.json();
-    console.log("in getProiNFO data ", data);
-    return data;
-  }
-*/
+
   async function selectProductImage() {
     var selectionIds = [];
     if (widgetConfig) {
@@ -210,7 +189,7 @@ function TextFieldExample() {
       var idStr = "";
       products.forEach((pro, index) => {
         const { handle, id } = pro;
-   //     proInfo.push(getProInfo(id));
+        proInfo.push(getProInfo(id));
         console.log("Selected product handle:", handle, id);
         handleStr += handle;
         idStr += id;

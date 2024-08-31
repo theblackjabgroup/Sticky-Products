@@ -59,3 +59,25 @@ export async function createOrUpdateBanner(arrayToIterate) {
       return new Response("Internal Server Error", { status: 500 });
     }
   }
+
+
+ export async function getProInfo(proId){
+    const { admin } = await authenticate.admin(request);
+    console.log("in getProiNFO proId ", proId);
+    const response = await admin.graphql(
+      `#graphql
+      query {
+        product(id: "${proId}") {
+          title
+          featuredImage
+          priceRangeV2
+          compareAtPriceRange
+          totalInventory
+        }
+      }`,
+    );
+    
+    const data = await response.json();
+    console.log("in getProiNFO data ", data);
+    return data;
+  }
