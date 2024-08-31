@@ -18,10 +18,10 @@ const prisma = new PrismaClient();
 
 export async function loader({ request, params }) {
   console.log("IN LOADER")
-  const { session } = await authenticate.admin(request);
+  const { session, admin} = await authenticate.admin(request);
   const { shop } = session;
 
-  const productsInfo = await session.graphql(
+  const productsInfo = await admin.graphql(
     `#graphql
     query {
       products() {
