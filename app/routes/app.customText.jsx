@@ -234,6 +234,7 @@ function TextFieldExample() {
       var handleStr = "";
       var idStr = "";
       products.forEach((pro, index) => {
+        proInfo.push(pro);
         const { handle, id } = pro;
         //  proInfo.push(getProInfo(id));
         console.log("Selected product handle:", handle, id);
@@ -245,7 +246,6 @@ function TextFieldExample() {
           idStr += ",";
         }
       });
-      proInfo.push(products);
       console.log("proInfo ", proInfo);
 
       console.log("Selected product handleStr:", handleStr);
