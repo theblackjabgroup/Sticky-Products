@@ -89,7 +89,7 @@ function TextFieldExample() {
 
   const [enableRecentlyViewed, setRecentlyViewed] = useState(false);
   const [selectProductsState, setSelectProductsState] = useState("");
-  const [selectedProductsId, setSelectedProductId] = useState(0);
+  const [selectedProductsId, setSelectedProductId] = useState("");
   const [bgcolor, setBgColor] = useState('#FFFFFF');
   const [bucolor, setBuColor] = useState('#000000');
   const [fontColor, setFontColor] = useState('#767676');
