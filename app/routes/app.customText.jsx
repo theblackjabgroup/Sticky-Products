@@ -221,6 +221,16 @@ function TextFieldExample() {
   const [lockAspectChecked, setLockAspectChecked] = useState(false);
   function handlelockAspectChecked() { setLockAspectChecked(!lockAspectChecked) }
 
+  useEffect(() => {
+    const savedProductInfo = localStorage.getItem("productInfo");
+    if (savedProductInfo) {
+      setProductInfo(JSON.parse(savedProductInfo));
+    }
+  }, []);
+  
+  useEffect(() => {
+    localStorage.setItem("productInfo", JSON.stringify(productInfo));
+  }, [productInfo]);
 
   async function selectProductImage() {
     var selectionIds = [];
@@ -270,9 +280,7 @@ function TextFieldExample() {
       console.log("proInfo ", proInfo);
 
       console.log("Selected product handleStr:", handleStr);
-      useEffect(() => {
       setProductInfo(proInfo);
-    }, []);
       setSelectProductsState(handleStr);
       setSelectedProductId(idStr);
     }
