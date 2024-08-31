@@ -376,7 +376,7 @@ function TextFieldExample() {
                   {productInfo.length > 0 ? (
                     <div class="bb-container" style={{ backgroundColor: bgcolor }}>
                       <button class="bb-close-btn">x</button>
-                      {productInfo.map((product) => (
+                      {productInfo.map((product, index) => (
                         <div>
                           <div class="bb-inner-container">
                             <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
@@ -396,10 +396,11 @@ function TextFieldExample() {
                             <div class="bb-upperButtonDiv">
                               <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button></div>
                           </div>
-                          <div class="bb-line">
-                            <div class="bb-child-line">
+                          {index < productInfo.length - 1 && (
+                            <div className="bb-line">
+                              <div className="bb-child-line"></div>
                             </div>
-                          </div>
+                          )}
                         </div>
                       ))}
                     </div>

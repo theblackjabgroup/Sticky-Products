@@ -107,16 +107,21 @@ async function identifyProductfromReq() {
     location.href.indexOf("products"),
   );
   var productHandleStr = "";
+  var recentlyViewed = false;
   const edges = await decodeJson();
   if (edges && edges.length > 0) {
     console.log("first edges ", edges);
     productHandleStr = edges[edges.length - 1].productHandleStr;
+    recentlyViewed = edges[edges.length - 1].recentlyViewed;
+    console.log("recentlyViewed before ", recentlyViewed);
   }
   
   console.log("productHandleStr ", productHandleStr);
   const fetchPromises = [];
+  console.log("recentlyViewed after ", recentlyViewed);
 
-  if (productHandleStr == "") {
+  if (recentlyViewed == "true") {
+    console.log("IN RECENTLY VIEWED")
     if (sessionStorage.getItem("productNameArr")) {
       const myArrayString = sessionStorage.getItem("productNameArr");
       productNameArr = JSON.parse(myArrayString);
@@ -189,6 +194,7 @@ async function identifyProductfromReq() {
   }
   else
   {
+    console.log("NOT IN RECENTLY VIEWED")
     const fixProductArr  = productHandleStr.split(",");
     console.log("fixProductArr ", fixProductArr);
    // fixProductArr.pop();
