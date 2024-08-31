@@ -29,9 +29,30 @@ export async function loader({ request, params }) {
         node {
         id
         title
-        featuredImage
-        priceRangeV2
-        compareAtPriceRange
+        featuredImage{
+            url
+            altText
+          }
+        priceRangeV2{
+          maxVariantPrice{
+            amount
+            currencyCode
+          }
+          minVariantPrice{
+            amount
+            currencyCode
+          }
+        }
+        compareAtPriceRange{
+          maxVariantCompareAtPrice{
+            amount
+            currencyCode
+          }
+          minVariantCompareAtPrice{
+            amount
+            currencyCode
+          }
+        }
         totalInventory
       }
         }
