@@ -107,20 +107,16 @@ function TextFieldExample() {
       setBuColor(widgetConfig.buColor || '#000000');
       setFontColor(widgetConfig.fontColor || '#767676');
       setFontSize(widgetConfig.fontSize || 14)
-      if(widgetConfig.displayPosition == "top-left")
-      {
+      if (widgetConfig.displayPosition == "top-left") {
         setActiveIndex(0);
       }
-      else if(widgetConfig.displayPosition == "top-right")
-      {
+      else if (widgetConfig.displayPosition == "top-right") {
         setActiveIndex(1);
       }
-      else if(widgetConfig.displayPosition == "bottom-left")
-      {
+      else if (widgetConfig.displayPosition == "bottom-left") {
         setActiveIndex(2);
       }
-      else if(widgetConfig.displayPosition == "bottom-right")
-      {
+      else if (widgetConfig.displayPosition == "bottom-right") {
         setActiveIndex(3);
       }
     }
@@ -188,7 +184,7 @@ function TextFieldExample() {
 
     const enableRecentlyViewed = localStorage.getItem("enableRecentlyViewed");
     const newState = enableRecentlyViewed === "true";
-    
+
     document.documentElement.style.setProperty(
       '--main-bb-slider-color',
       newState ? "#279002" : "#D9D9D9"
@@ -204,7 +200,7 @@ function TextFieldExample() {
 
   async function selectProductImage() {
     var selectionIds = [];
-    if (widgetConfig) {
+    if (widgetConfig.productIdStr) {
       console.log("widgetConfig.productIdStr ", widgetConfig.productIdStr)
       selectionIds = widgetConfig.productIdStr.split(',').map(id => ({
         id: `${id.trim()}`
@@ -365,7 +361,7 @@ function TextFieldExample() {
                       <div class="bb-label">On Sale</div>
                     </div>
                     <div class="bb-upperButtonDiv">
-                      <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize  }}>Buy Now</button>
+                      <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button>
                     </div>
                   </div>
                 </div>
@@ -391,9 +387,9 @@ function TextFieldExample() {
                             </div>
                             {product.totalInventory === 0 ? (<div class="bb-upper-label bb-upper-label-sold"><div class="bb-label">Sold Out</div></div>)
                               : product.variants[0].compareAtPrice > product.variants[0].price
-                              ?
-                              (<div class="bb-upper-label bb-upper-label-sale"><div class="bb-label">On Sale</div></div>
-                              ): <div class="bb-upper-label"><div class="bb-label"></div></div>}
+                                ?
+                                (<div class="bb-upper-label bb-upper-label-sale"><div class="bb-label">On Sale</div></div>
+                                ) : <div class="bb-upper-label"><div class="bb-label"></div></div>}
                             <div class="bb-upperButtonDiv">
                               <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button></div>
                           </div>
