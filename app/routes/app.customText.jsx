@@ -154,6 +154,7 @@ function TextFieldExample() {
   const [lockAspectChecked, setLockAspectChecked] = useState(false);
   function handlelockAspectChecked() { setLockAspectChecked(!lockAspectChecked) }
 
+  /*
   async function getProInfo(proId){
     const { admin } = await authenticate.admin(request);
     console.log("in getProiNFO proId ", proId);
@@ -174,7 +175,7 @@ function TextFieldExample() {
     console.log("in getProiNFO data ", data);
     return data;
   }
-
+*/
   async function selectProductImage() {
     var selectionIds = [];
     if (widgetConfig) {
@@ -209,7 +210,7 @@ function TextFieldExample() {
       var idStr = "";
       products.forEach((pro, index) => {
         const { handle, id } = pro;
-        proInfo.push(getProInfo(id));
+   //     proInfo.push(getProInfo(id));
         console.log("Selected product handle:", handle, id);
         handleStr += handle;
         idStr += id;
