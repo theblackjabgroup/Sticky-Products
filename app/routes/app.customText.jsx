@@ -18,50 +18,8 @@ const prisma = new PrismaClient();
 
 export async function loader({ request, params }) {
   console.log("IN LOADER")
-  const { session, admin } = await authenticate.admin(request);
+  const { session } = await authenticate.admin(request);
   const { shop } = session;
-
-  const productsInfo = await admin.graphql(
-    `#graphql
-    query {
-      products(first: 100) {
-        edges {
-        node {
-        id
-        title
-        featuredImage{
-            url
-            altText
-          }
-        priceRangeV2{
-          maxVariantPrice{
-            amount
-            currencyCode
-          }
-          minVariantPrice{
-            amount
-            currencyCode
-          }
-        }
-        compareAtPriceRange{
-          maxVariantCompareAtPrice{
-            amount
-            currencyCode
-          }
-          minVariantCompareAtPrice{
-            amount
-            currencyCode
-          }
-        }
-        totalInventory
-      }
-        }
-      }
-    }`,
-  );
-
-  const productsJson = await productsInfo.json();
-  console.log("productsJson ", productsJson.data.products.edges)
 
   const widgetConfig = await prisma.banner.findUnique({
     where: {
@@ -76,7 +34,7 @@ export async function loader({ request, params }) {
   console.log("shop", shop)
   console.log("{ widgetConfig } ", { widgetConfig });
   console.log("json({ widgetConfig }) ", json({ widgetConfig }));
-  return json({ widgetConfig, products: productsJson.data.products.edges });
+  return json({ widgetConfig });
 }
 
 export async function action({ request, params }) {
@@ -97,8 +55,7 @@ export async function action({ request, params }) {
 
 function TextFieldExample() {
 
-  const { widgetConfig, proJson } = useLoaderData();
-  console.log("proJson in TextFieldExample", proJson);
+  const { widgetConfig } = useLoaderData();
   console.log("widgetConfig in TextFieldExample", widgetConfig)
   const submit = useSubmit();
   function handleSave() {
@@ -149,19 +106,19 @@ function TextFieldExample() {
       setBuColor(widgetConfig.buColor || '#000000');
       setFontColor(widgetConfig.fontColor || '#767676');
       setFontSize(widgetConfig.fontSize || 14)
-      if(widgetConfig.positionClasses == "top-left")
+      if(widgetConfig.displayPosition == "top-left")
       {
         setActiveIndex(0);
       }
-      else if(widgetConfig.positionClasses == "top-right")
+      else if(widgetConfig.displayPosition == "top-right")
       {
         setActiveIndex(1);
       }
-      else if(widgetConfig.positionClasses == "bottom-left")
+      else if(widgetConfig.displayPosition == "bottom-left")
       {
         setActiveIndex(2);
       }
-      else if(widgetConfig.positionClasses == "bottom-right")
+      else if(widgetConfig.displayPosition == "bottom-right")
       {
         setActiveIndex(3);
       }
@@ -227,7 +184,7 @@ function TextFieldExample() {
       setProductInfo(JSON.parse(savedProductInfo));
     }
   }, []);
-  
+
   useEffect(() => {
     localStorage.setItem("productInfo", JSON.stringify(productInfo));
   }, [productInfo]);
