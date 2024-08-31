@@ -86,9 +86,8 @@ function TextFieldExample() {
 
   const [topValue, setTopValue] = useState(0);
   const [leftValue, setLeftValue] = useState(0);
-  const initialEnableRecentlyViewed = localStorage.getItem("enableRecentlyViewed") === 'true'; // Ensure it's a boolean
 
-  const [enableRecentlyViewed, setRecentlyViewed] = useState(initialEnableRecentlyViewed);
+  const [enableRecentlyViewed, setRecentlyViewed] = useState(false);
   const [selectProductsState, setSelectProductsState] = useState("");
   const [selectedProductsId, setSelectedProductId] = useState(0);
   const [bgcolor, setBgColor] = useState('#FFFFFF');
@@ -168,12 +167,12 @@ function TextFieldExample() {
   function handleRecentlyViewed() {
     setRecentlyViewed(prevState => {
       const newState = !prevState;
+      localStorage.setItem("enableRecentlyViewed", newState.toString());
       document.documentElement.style.setProperty(
         '--main-bb-slider-color',
         newState ? "#279002" : "#D9D9D9"
       );
       setRecentlyViewedPreview(newState ? true : false);
-      localStorage.setItem("enableRecentlyViewed", enableRecentlyViewed);
       return newState;
     });
   }
@@ -186,6 +185,16 @@ function TextFieldExample() {
     if (savedProductInfo) {
       setProductInfo(JSON.parse(savedProductInfo));
     }
+
+    const enableRecentlyViewed = localStorage.getItem("enableRecentlyViewed");
+    const newState = enableRecentlyViewed === "true";
+    
+    document.documentElement.style.setProperty(
+      '--main-bb-slider-color',
+      newState ? "#279002" : "#D9D9D9"
+    );
+    setRecentlyViewedPreview(newState);
+    setRecentlyViewed(newState);
   }, []);
 
   useEffect(() => {
