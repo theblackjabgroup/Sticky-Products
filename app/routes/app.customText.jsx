@@ -21,6 +21,27 @@ export async function loader({ request, params }) {
   const { session } = await authenticate.admin(request);
   const { shop } = session;
 
+  const productsInfo = await session.graphql(
+    `#graphql
+    query {
+      products() {
+        edges {
+        node {
+        id
+        title
+        featuredImage
+        priceRangeV2
+        compareAtPriceRange
+        totalInventory
+      }
+        }
+      }
+    }`,
+  );
+  
+  const productsJson = await productsInfo.json();
+  console.log("productsJson ",productsJson)
+
   const widgetConfig = await prisma.banner.findUnique({
     where: {
       id_shop: {
@@ -34,8 +55,9 @@ export async function loader({ request, params }) {
   console.log("shop", shop)
   console.log("{ widgetConfig } ", { widgetConfig });
   console.log("json({ widgetConfig }) ", json({ widgetConfig }));
-  return json({ widgetConfig });
+  return json({ widgetConfig , productsJson});
 }
+
 export async function action({ request, params }) {
   console.log("inside action ", params);
   const { session } = await authenticate.admin(request);
@@ -54,7 +76,8 @@ export async function action({ request, params }) {
 
 function TextFieldExample() {
 
-  const { widgetConfig } = useLoaderData();
+  const { widgetConfig , proJson} = useLoaderData();
+  console.log("proJson in TextFieldExample",proJson);
   console.log("widgetConfig in TextFieldExample", widgetConfig)
   const submit = useSubmit();
   function handleSave() {
