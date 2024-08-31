@@ -17,6 +17,7 @@ import { json } from "@remix-run/node";
 const prisma = new PrismaClient();
 
 export async function loader({ request, params }) {
+  console.log("IN LOADER")
   const { session } = await authenticate.admin(request);
   const { shop } = session;
 
@@ -189,7 +190,7 @@ function TextFieldExample() {
       var idStr = "";
       products.forEach((pro, index) => {
         const { handle, id } = pro;
-        proInfo.push(getProInfo(id));
+      //  proInfo.push(getProInfo(id));
         console.log("Selected product handle:", handle, id);
         handleStr += handle;
         idStr += id;
