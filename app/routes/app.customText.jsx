@@ -376,62 +376,32 @@ function TextFieldExample() {
                   {productInfo.length > 0 ? (
                     <div class="bb-container" style={{ backgroundColor: bgcolor }}>
                       <button class="bb-close-btn">x</button>
-                      <div class="bb-inner-container">
-                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
-                          <img src="//cdn.shopify.com/s/files/1/0799/0158/9799/files/casual-fashion-woman_925x_d0d36c27-3415-451f-bb47-f90d95fb7ee1.jpg?v=1714067302" class="bb-pro-img" />
+                      {productInfo.map((product) => (
+                        <div>
+                          <div class="bb-inner-container">
+                            <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
+                              <img src={product.images[0].originalSrc} class="bb-pro-img" />
+                            </div>
+                            <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
+                              {product.handle}
+                            </div>
+                            <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
+                              {product.variants[0].price}
+                            </div>
+                            {product.inventoryQuantity === 0 ? (<div class="bb-upper-label bb-upper-label-sold"><div class="bb-label">Sold Out</div></div>)
+                              : product.variants[0].compareAtPrice > product.variants[0].price
+                              &&
+                              (<div class="bb-upper-label bb-upper-label-sale"><div class="bb-label">On Sale</div></div>
+                              )}
+                            <div class="bb-upperButtonDiv">
+                              <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button></div>
+                          </div>
+                          <div class="bb-line">
+                            <div class="bb-child-line">
+                            </div>
+                          </div>
                         </div>
-                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
-                          Classic V...
-                        </div>
-                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>60.00</div>
-                        <div class="bb-upper-label bb-upper-label-sold"><div class="bb-label">Sold Out</div></div>
-                        <div class="bb-upperButtonDiv">
-                          <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button></div>
-                      </div>
-                      <div class="bb-line">
-                        <div class="bb-child-line">
-                        </div>
-                      </div>
-                      <div class="bb-inner-container">
-                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
-                          <img src="//cdn.shopify.com/s/files/1/0799/0158/9799/files/dark-wall-bedside-table_925x_10e5b8ba-a57c-4651-a5e9-fce49a2f3ebd.jpg?v=1714064469" class="bb-pro-img" />
-                        </div>
-                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
-                          Bedside T...
-                        </div>
-                        <div class="bb-banner" style={{ lineHeight: '1', backgroundColor: bgcolor, color: fontColor }}>
-                          <div style={{ textDecoration: 'line-through', fontSize: fontSize }}>85.00</div>
-                          <div style={{ fontSize: fontSize }}>69.99</div>
-                        </div>
-                        <div class="bb-upper-label bb-upper-label-sale">
-                          <div class="bb-label">On Sale</div>
-                        </div>
-                        <div class="bb-upperButtonDiv">
-                          <button class="bb-inner-button" style={{ backgroundColor: bucolor, fontSize: fontSize }}>Buy Now</button>
-                        </div>
-                      </div>
-                      <div class="bb-line">
-                        <div class="bb-child-line">
-                        </div>
-                      </div>
-                      <div class="bb-inner-container" style={{ marginBottom: '0px' }}>
-                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor }}>
-                          <img src="//cdn.shopify.com/s/files/1/0799/0158/9799/files/comfortable-living-room-cat_925x_b270a759-b837-47c8-8717-c4c747a2b42b.jpg?v=1714064467" class="bb-pro-img" />
-                        </div>
-                        <div class="bb-banner" style={{ backgroundColor: bgcolor, color: fontColor, fontSize: fontSize }}>
-                          Black Bea...
-                        </div>
-                        <div class="bb-banner" style={{ lineHeight: '1', backgroundColor: bgcolor, color: fontColor }}>
-                          <div style={{ textDecoration: 'line-through', fontSize: fontSize }}>80.00</div>
-                          <div style={{ fontSize: fontSize }}>69.99</div>
-                        </div>
-                        <div class="bb-upper-label bb-upper-label-sale">
-                          <div class="bb-label">On Sale</div>
-                        </div>
-                        <div class="bb-upperButtonDiv">
-                          <button class="bb-inner-button" style={{ backgroundColor: bucolor }}>Buy Now</button>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   ) :
                     <div style={{ background: '#f0f0f0', height: '400px', width: '400px', margin: '0 auto', borderRadius: '9px', boxShadow: 'var(--p-shadow-0)' }}>
