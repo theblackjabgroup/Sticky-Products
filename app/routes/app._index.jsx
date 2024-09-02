@@ -66,7 +66,7 @@ export default function Index() {
                   <p>Easily install Shopify Badges and Labels. Check our installation guide for more details.</p>
                 </BlockStack>
                 {/* <Button size='micro' variant='primary'>Read Installation Guide</Button> */}
-                <a href="https://www.blackbytt.in/installation-guide-1" rel="noreferrer" target='_blank'><button style={{ cursor: 'pointer', display: 'inline-flex', boxSizing: 'border-box', boxShadow: 'var(--p-shadow-button-primary-inset)', background: 'var(--p-color-button-gradient-bg-fill), var(--p-color-bg-fill-brand)', padding: 'var(--p-space-150) var(--p-space-300)', border: 'none', borderRadius: 'var(--p-border-radius-200)', fontFamily: 'var(--p-font-family-sans)', color: 'var(--p-color-text-brand-on-bg-fill)' }} className=''>Read Installation Guide</button></a>
+                <a href="https://www.blackbytt.in/installation-guide-sticky" rel="noreferrer" target='_blank'><button style={{ cursor: 'pointer', display: 'inline-flex', boxSizing: 'border-box', boxShadow: 'var(--p-shadow-button-primary-inset)', background: 'var(--p-color-button-gradient-bg-fill), var(--p-color-bg-fill-brand)', padding: 'var(--p-space-150) var(--p-space-300)', border: 'none', borderRadius: 'var(--p-border-radius-200)', fontFamily: 'var(--p-font-family-sans)', color: 'var(--p-color-text-brand-on-bg-fill)' }} className=''>Read Installation Guide</button></a>
               </InlineStack>
             </InlineStack>
           </Card>

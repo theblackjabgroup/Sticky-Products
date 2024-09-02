@@ -23,7 +23,7 @@ export default function App() {
         <Link to="/app" rel="home">
           Home
         </Link>
-        <Link to="/app/recently-viewed">Recently Viewed</Link>
+        <Link to="/app/recently-viewed">Customize Widget</Link>
       </NavMenu>
       <Outlet />
     </AppProvider>

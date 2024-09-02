@@ -1,7 +1,10 @@
 var productNameArr = [];
 document.addEventListener("DOMContentLoaded", function () {
   //   sessionStorage.clear();
+  const width = window.innerWidth;
+  if (width > 500) {
   identifyProductfromReq();
+  }
 });
 
 async function fetchProduct(productName) {
